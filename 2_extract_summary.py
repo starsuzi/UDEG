@@ -31,6 +31,7 @@ torch_device = torch.device("cuda:"+str(args.device))
 model_name = 'google/pegasus-xsum'
 tokenizer = PegasusTokenizer.from_pretrained(model_name)
 
+#tokenized document path
 with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_text_tokenized', 'rb') as file:
     test_encoding = pickle.load(file)
 
