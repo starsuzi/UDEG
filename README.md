@@ -22,5 +22,3 @@ cd tools/eval/ndeval && make && cd ../../..
 ## 2. 파일 순서대로 실행
 * input, output를 잘 설정하기!
 * 2_extract_summary가 pegasus 코드이고, 모델 바꿀때마다 input, output 잘 설정하기.
-
-
