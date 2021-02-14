@@ -36,7 +36,8 @@ with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_tex
 
 test_encoding = test_encoding.to(torch_device)
 #len is 403666
-test_dataset = AntiqueDataset(test_encoding, 403666)
+print(len(test_encoding['input_ids']))
+test_dataset = AntiqueDataset(test_encoding,len(test_encoding['input_ids']))
 eval_loader = DataLoader(test_dataset, batch_size=20, shuffle=False)
 model = PegasusForConditionalGeneration.from_pretrained(model_name).to(torch_device)
 
