@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-mkdir -p data/output/pegasus_xsum
+mkdir -p data/output/baseline
 
-EXP="pegasus_xsum"
-INDEX="data/indexes/lucene-index-pegasus_xsum"
-OUTPUT_BASE_PATH="data/output/pegasus_xsum/"
+EXP="baseline"
+INDEX="data/indexes/lucene-index-baseline"
+OUTPUT_BASE_PATH="data/output/baseline/"
 TOPICS="data/text_format/queries_test_non-offensive_text.txt"
 
 for MODEL in "bm25" "qld"
