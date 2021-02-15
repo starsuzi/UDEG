@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-INPUT_BASE_PATH="data/output/pegasus_xsum/"
+INPUT_BASE_PATH="data/output/non_offensive/pegasus_xsum/"
 QREL_PATH="data/text_format/qrels_test_non-offensive_text_binary.txt"
 
 for RUN in ${INPUT_BASE_PATH}*.txt

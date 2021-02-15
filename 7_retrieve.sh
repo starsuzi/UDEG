@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
-mkdir -p data/output/baseline
+mkdir -p data/output/total/pegasus_xsum
 
-EXP="baseline"
-INDEX="data/indexes/lucene-index-baseline"
-OUTPUT_BASE_PATH="data/output/baseline/"
-TOPICS="data/text_format/queries_test_non-offensive_text.txt"
+# for non-offensive folder
+#mkdir -p data/non_offensive/total/pegasus_xsum
+
+EXP="pegasus_xsum"
+INDEX="data/indexes/lucene-index-pegasus_xsum"
+OUTPUT_BASE_PATH="data/output/total/pegasus_xsum"
+TOPICS="data/text_format/queries_test_text.txt"
 
 for MODEL in "bm25" "qld"
 do
