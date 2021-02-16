@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
-mkdir -p data/output/total/pegasus_xsum
+#mkdir -p data/output/total/pegasus_reddit
 
 # for non-offensive folder
-#mkdir -p data/non_offensive/total/pegasus_xsum
+mkdir -p data/output/non_offensive/pegasus_reddit
 
-EXP="pegasus_xsum"
-INDEX="data/indexes/lucene-index-pegasus_xsum"
-OUTPUT_BASE_PATH="data/output/total/pegasus_xsum"
-TOPICS="data/text_format/queries_test_text.txt"
+EXP="pegasus_reddit"
+INDEX="data/indexes/lucene-index-pegasus_reddit"
+#OUTPUT_BASE_PATH="data/output/total/pegasus_reddit"
+OUTPUT_BASE_PATH="data/output/non_offensive/pegasus_reddit"
+#TOPICS="data/text_format/queries_test_text.txt"
+TOPICS="data/text_format/queries_test_non-offensive_text.txt"
 
 for MODEL in "bm25" "qld"
 do
