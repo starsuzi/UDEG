@@ -1,5 +1,4 @@
 '''Converts Antique collection to Anserini jsonl files.'''
-import ir_datasets
 import json
 import os
 import argparse
@@ -15,7 +14,7 @@ parser.add_argument('--input_folder',
 parser.add_argument("--output_folder",
                     help="output directory.",
                     type=str,
-                    default = './data/json_format/pegasus_xsum')
+                    default = './data/json_format/pegasus_reddit')
 
 parser.add_argument('--max_docs_per_file', 
                     default=1000000, 
@@ -23,12 +22,9 @@ parser.add_argument('--max_docs_per_file',
 
 parser.add_argument('--predictions',  
                     help='File containing predicted summary.',
-                    default = './data/text_format/tokenized/test_pegasus_xsum')                 
+                    default = './data/text_format/tokenized/test_pegasus_reddit')                 
 
 args = parser.parse_args()
-
-# load dataset
-dataset = ir_datasets.load('antique/test')
 
 def convert_collection():
     
