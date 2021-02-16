@@ -3,7 +3,8 @@
 #INPUT_BASE_PATH="data/output/total/pegasus_reddit/"
 INPUT_BASE_PATH="data/output/non_offensive/pegasus_reddit/"
 #QREL_PATH="data/text_format/qrels_test_text_binary.txt"
-QREL_PATH="data/text_format/qrels_test_non-offensive_text_binary.txt"
+#QREL_PATH="data/text_format/qrels_test_non-offensive_text_binary.txt"
+QREL_PATH="data/text_format/qrels_test_non-offensive_text_0_3.txt"
 
 for RUN in ${INPUT_BASE_PATH}*.txt
 do
