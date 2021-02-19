@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-INPUT=data/json_format/keyphrase_5
-OUTPUT=data/indexes/lucene-index-keyphrase_5
+INPUT=data/json_format/lexrank
+OUTPUT=data/indexes/lucene-index-lexrank
 
 if [ ! -d "${OUTPUT}" ]
 then 

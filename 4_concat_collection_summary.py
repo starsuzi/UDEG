@@ -14,7 +14,7 @@ parser.add_argument('--input_folder',
 parser.add_argument("--output_folder",
                     help="output directory.",
                     type=str,
-                    default = './data/json_format/keyphrase_5')
+                    default = './data/json_format/lexrank')
 
 parser.add_argument('--max_docs_per_file', 
                     default=1000000, 
@@ -22,7 +22,7 @@ parser.add_argument('--max_docs_per_file',
 
 parser.add_argument('--predictions',  
                     help='File containing predicted summary.',
-                    default = './data/text_format/keyphrase/keyphrase.txt')                 
+                    default = './data/text_format/lexrank/lexrank.txt')                 
 
 args = parser.parse_args()
 

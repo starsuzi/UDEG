@@ -2,12 +2,12 @@
 #mkdir -p data/output/total/pegasus_reddit
 
 # for non-offensive folder
-mkdir -p data/output/non_offensive/keyphrase_5
+mkdir -p data/output/non_offensive/lexrank
 
-EXP="keyphrase_5"
-INDEX="data/indexes/lucene-index-keyphrase_5"
+EXP="lexrank"
+INDEX="data/indexes/lucene-index-lexrank"
 #OUTPUT_BASE_PATH="data/output/total/pegasus_reddit"
-OUTPUT_BASE_PATH="data/output/non_offensive/keyphrase_5"
+OUTPUT_BASE_PATH="data/output/non_offensive/lexrank"
 #TOPICS="data/text_format/queries_test_text.txt"
 TOPICS="data/text_format/queries_test_non-offensive_text.txt"
 
