@@ -33,4 +33,4 @@ for doc in tqdm(lst_document):
         summarised_sentence = doc
         output_key.write(summarised_sentence)
     
-    output_key.close()
+    #output_key.close()
