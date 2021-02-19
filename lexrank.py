@@ -10,6 +10,8 @@ input_file  = open('./data/text_format/test_text.txt', 'r', encoding='latin1')
 lst_document = input_file.readlines()
 input_file.close()
 
+output_key = open('./data/text_format/lexrank/lexrank.txt', 'a')
+
 for doc in tqdm(lst_document):
     #print(doc)
     doc = doc.lower()
@@ -23,13 +25,12 @@ for doc in tqdm(lst_document):
             summarised_sentence = str(summary[1]).rstrip()
         else: 
             summarised_sentence = str(summary[0]).rstrip()
-    except:
-        print(doc)
-        summarised_sentence = doc
-        #print(doc)
-    #print(summarised_sentence)
 
-    output_key = open('./data/text_format/lexrank/lexrank.txt', 'a')
-    output_key.write(summarised_sentence)
-    output_key.write('\n')
+        output_key.write(summarised_sentence)
+        output_key.write('\n')
+    except:
+        #print(doc)
+        summarised_sentence = doc
+        output_key.write(summarised_sentence)
+    
     output_key.close()
