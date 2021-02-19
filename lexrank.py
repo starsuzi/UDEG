@@ -16,7 +16,7 @@ for doc in tqdm(lst_document):
     parser = PlaintextParser.from_string(doc, Tokenizer('english'))
 
     summarizer = LexRankSummarizer()
-    #Summarize the document with 2 sentences
+    #Summarize the document with 1 sentences
     summary = summarizer(parser.document, 1)
     try:
         if len(str(summary[0]).split()) < 2:
@@ -24,7 +24,7 @@ for doc in tqdm(lst_document):
         else: 
             summarised_sentence = str(summary[0]).rstrip()
     except:
-        summarised_sentence = ' '
+        summarised_sentence = doc
         #print(doc)
     #print(summarised_sentence)
 
