@@ -24,6 +24,7 @@ for doc in tqdm(lst_document):
         else: 
             summarised_sentence = str(summary[0]).rstrip()
     except:
+        print(doc)
         summarised_sentence = doc
         #print(doc)
     #print(summarised_sentence)
