@@ -7,7 +7,6 @@ from transformers import PegasusForConditionalGeneration, PegasusTokenizer
 import pickle, os, json, torch
 
 input_file = open('/home/syjeong/DocExpan/Antique-ir/data/text_format/test_text.txt', 'r')
-#input_file = open('/home/syjeong/DocExpan/temp.txt', 'r')
 
 dataset_test = input_file.readlines()
 print(len(dataset_test))
