@@ -59,10 +59,13 @@ filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/pega_te
 for batch in tqdm(eval_loader):
     model.eval()
     with torch.no_grad():
-        for j in range(0,3):
+        for i in range(0,3):
+            lst_tgt_text = []
             model.train()
             translated = model.generate(**batch)
             tgt_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
+            lst_tgt_text.append(tgt_text)
+            print(lst_tgt_text)
 
         with open(filePath, 'a+') as lf:
             lf.write('\n'.join(tgt_text))
@@ -70,5 +73,3 @@ for batch in tqdm(eval_loader):
 
 with open(filePath, 'r') as fin:
     data = fin.read().splitlines(True)
-#with open(filePath, 'w') as fout:
-#    fout.writelines(data[1:])
