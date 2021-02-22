@@ -69,6 +69,16 @@ for batch in tqdm(eval_loader):
         for i in range(0,3):
             model.train()
             translated = model.generate(**batch)
+            '''translated = model.generate(
+                input_ids=batch["input_ids"],
+                attention_mask=batch["attention_mask"],
+                num_beams=8,
+                no_repeat_ngram_size=3,
+                min_length=7,
+                do_sample=False,
+                #top_k=100,
+                num_return_sequences=1
+            )'''
             tgt_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
             matrix_tgt_text.append(tgt_text)
 
