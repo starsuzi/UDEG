@@ -70,7 +70,7 @@ for batch in tqdm(eval_loader):
 
         arr_tgt_text = np.array(matrix_tgt_text)
 
-        for j in range(0,args.batch_size):
+        for j in range(0,len(batch['input_ids'])):
             concat_summary = ' '.join(arr_tgt_text[:, j])
             #import pdb; pdb.set_trace()
             with open(filePath, 'a+') as lf:
