@@ -10,6 +10,10 @@ import numpy as np
 gc.collect()
 torch.cuda.empty_cache()
 
+random_seed = 2021
+torch.manual_seed(random_seed)
+np.random.seed(random_seed)
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--device', type=int, default=1, help='CUDA device')
 parser.add_argument('--batch_size', type=int, default=20, help='batch')
