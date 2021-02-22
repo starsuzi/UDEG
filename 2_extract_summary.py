@@ -15,7 +15,7 @@ torch.cuda.empty_cache()
 #np.random.seed(random_seed)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--device', type=int, default=1, help='CUDA device')
+parser.add_argument('--device', type=int, default=0, help='CUDA device')
 parser.add_argument('--batch_size', type=int, default=20, help='batch')
 args = parser.parse_args()
 
@@ -55,12 +55,12 @@ eval_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False
 model = PegasusForConditionalGeneration.from_pretrained(model_name).to(torch_device)
 #model = BartForConditionalGeneration.from_pretrained(model_name).to(torch_device)
 
-if os.path.exists('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_3mc1'):
-  os.remove('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_3mc1')
+if os.path.exists('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc_temp5_1'):
+  os.remove('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc_temp5_1')
 else:
   print("The file does not exist")
 
-filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_3mc1'
+filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc_temp5_1'
 
 for batch in tqdm(eval_loader):
     model.eval()
@@ -68,8 +68,8 @@ for batch in tqdm(eval_loader):
     with torch.no_grad():
         for i in range(0,3):
             model.train()
-            translated = model.generate(**batch)
-            '''translated = model.generate(
+            #translated = model.generate(**batch)
+            translated = model.generate(
                 input_ids=batch["input_ids"],
                 attention_mask=batch["attention_mask"],
                 num_beams=8,
@@ -77,8 +77,9 @@ for batch in tqdm(eval_loader):
                 min_length=7,
                 do_sample=False,
                 #top_k=100,
-                num_return_sequences=1
-            )'''
+                num_return_sequences=1,
+                temperature=0.5
+            )
             tgt_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
             matrix_tgt_text.append(tgt_text)
 
