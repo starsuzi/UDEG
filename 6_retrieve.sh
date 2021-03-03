@@ -2,12 +2,12 @@
 #mkdir -p data/output/total/pegasus_reddit
 
 # for non-offensive folder
-mkdir -p data/output/non_offensive/lexrank
+mkdir -p data/output/non_offensive/pegasus_xsum_beam8_minlen5_3mc
 
-EXP="lexrank"
-INDEX="data/indexes/lucene-index-lexrank"
+EXP="pegasus_xsum_beam8_minlen5_3mc"
+INDEX="data/indexes/lucene-index-pegasus_xsum_beam8_minlen5_3mc"
 #OUTPUT_BASE_PATH="data/output/total/pegasus_reddit"
-OUTPUT_BASE_PATH="data/output/non_offensive/lexrank"
+OUTPUT_BASE_PATH="data/output/non_offensive/pegasus_xsum_beam8_minlen5_3mc"
 #TOPICS="data/text_format/queries_test_text.txt"
 TOPICS="data/text_format/queries_test_non-offensive_text.txt"
 

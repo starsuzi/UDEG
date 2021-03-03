@@ -1,9 +1,8 @@
+
 lst_files = [
-		'./data/text_format/keyphrase/keyphrase00.txt',
-        './data/text_format/keyphrase/keyphrase01.txt',
-        './data/text_format/keyphrase/keyphrase02.txt',
-        './data/text_format/keyphrase/keyphrase03.txt',
-        './data/text_format/keyphrase/keyphrase04.txt'	
+		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc1',
+		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc2',
+		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc3'
 		]
 
 
@@ -21,10 +20,13 @@ try :
 		file_read.close()
 
 except :
-	print("error")	
+	print('error')	
 	
-fr = open('./data/text_format/keyphrase/keyphrase.txt','w')
+fr = open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc','w')
 fr.write(full_txt)
 fr.close()
 
-print("done")
+print('done')
+
+# Merge the predictions into a single file.
+#cat /home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_bart_xsum? > /home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_bart_xsum
