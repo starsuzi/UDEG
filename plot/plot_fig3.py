@@ -31,5 +31,5 @@ plt.show()
 
 
 
-plt.savefig('./plot/fig3.pdf', bbox_inches='tight', pad_inches=0)
-plt.savefig('./plot/fig3.png', bbox_inches='tight', pad_inches=0)
+plt.savefig('./output/fig3.pdf', bbox_inches='tight', pad_inches=0)
+plt.savefig('./output/fig3.png', bbox_inches='tight', pad_inches=0)

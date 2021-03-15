@@ -45,5 +45,5 @@ fig.tight_layout()
 
 plt.show()
 
-plt.savefig('./plot/fig4.pdf', bbox_inches='tight', pad_inches=0)
-plt.savefig('./plot/fig4.png', bbox_inches='tight', pad_inches=0)
+plt.savefig('./output/fig4.pdf', bbox_inches='tight', pad_inches=0)
+plt.savefig('./output/fig4.png', bbox_inches='tight', pad_inches=0)
