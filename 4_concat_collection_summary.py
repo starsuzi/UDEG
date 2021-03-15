@@ -14,7 +14,7 @@ parser.add_argument('--input_folder',
 parser.add_argument("--output_folder",
                     help="output directory.",
                     type=str,
-                    default = './data/json_format/pegasus_xsum_beam8_minlen5_3mc')
+                    default = './data/json_format/pegasus_xsum_topk_4')
 
 parser.add_argument('--max_docs_per_file', 
                     default=1000000, 
@@ -22,7 +22,7 @@ parser.add_argument('--max_docs_per_file',
 
 parser.add_argument('--predictions',  
                     help='File containing predicted summary.',
-                    default = './data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc')                 
+                    default = './data/text_format/tokenized/test_pegasus_xsum_topk_4')                 
 
 args = parser.parse_args()
 

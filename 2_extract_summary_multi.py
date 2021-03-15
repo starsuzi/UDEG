@@ -40,7 +40,7 @@ model_name = 'google/pegasus-xsum'
 tokenizer = PegasusTokenizer.from_pretrained(model_name)
 
 #tokenized document path
-with open('./data/text_format/tokenized/pegasus_test_text_tokenized_split2_0', 'rb') as file:
+with open('./data/text_format/tokenized/pegasus_test_text_tokenized0', 'rb') as file:
     test_encoding = pickle.load(file) 
 
 """
@@ -66,7 +66,7 @@ test_dataset = MSDataset(test_encoding, len_input)
 
 
 
-eval_loader = DataLoader(test_dataset, batch_size=40, shuffle=False, num_workers=8)
+eval_loader = DataLoader(test_dataset, batch_size=10, shuffle=False, num_workers=8)
 # model = PegasusForConditionalGeneration.from_pretrained(model_name)
 # model = nn.DataParallel(model, device_ids=[0, 1])
 # model = model.to(torch_device)
@@ -78,18 +78,18 @@ model = model.to(torch_device)
 # else:
     # model = PegasusForConditionalGeneration.from_pretrained(model_name).to(torch_device)
 
-if os.path.exists('./data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_5mc0_0'):
-  os.remove('./data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_5mc0_0')
+if os.path.exists('./data/text_format/tokenized/test_pegasus_xsum_topk_4mc0'):
+  os.remove('./data/text_format/tokenized/test_pegasus_xsum_topk_4mc0')
 else:
   print("The file does not exist")
 
-filePath = './data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_5mc0_0'
+filePath = './data/text_format/tokenized/test_pegasus_xsum_topk_4mc0'
 
 for batch in tqdm(eval_loader):
     model.eval()
     matrix_tgt_text = []
     with torch.no_grad():
-        for i in range(0,5):
+        for i in range(0,4):
             model.train()
 
             batch["input_ids"] = batch["input_ids"].to(torch_device)
