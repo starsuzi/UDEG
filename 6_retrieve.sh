@@ -2,14 +2,18 @@
 #mkdir -p data/output/total/pegasus_reddit
 
 # for non-offensive folder
-mkdir -p data/output/non_offensive/pegasus_xsum_beam8_minlen5_3mc
+#mkdir -p data/output/non_offensive/pegasus_xsum_beam8_minlen5_3mc
+mkdir -p data/output/total/pegasus_xsum_topk_4
 
-EXP="pegasus_xsum_beam8_minlen5_3mc"
-INDEX="data/indexes/lucene-index-pegasus_xsum_beam8_minlen5_3mc"
-#OUTPUT_BASE_PATH="data/output/total/pegasus_reddit"
-OUTPUT_BASE_PATH="data/output/non_offensive/pegasus_xsum_beam8_minlen5_3mc"
-#TOPICS="data/text_format/queries_test_text.txt"
-TOPICS="data/text_format/queries_test_non-offensive_text.txt"
+
+EXP="pegasus_xsum_topk_4"
+INDEX="data/indexes/lucene-index-pegasus_xsum_topk_4"
+
+OUTPUT_BASE_PATH="data/output/total/pegasus_xsum_topk_4"
+TOPICS="data/text_format/queries_test_text.txt"
+
+#OUTPUT_BASE_PATH="data/output/non_offensive/pegasus_xsum_beam8_minlen5_3mc"
+#TOPICS="data/text_format/queries_test_non-offensive_text.txt"
 
 for MODEL in "bm25" "qld"
 do

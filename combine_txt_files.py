@@ -1,8 +1,7 @@
 
 lst_files = [
-		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc1',
-		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc2',
-		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc3'
+		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_4mc0',
+		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_4mc1'
 		]
 
 
@@ -22,9 +21,11 @@ try :
 except :
 	print('error')	
 	
-fr = open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc','w')
+fr = open('//home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_4','w')
 fr.write(full_txt)
 fr.close()
+
+#print(len(full_txt))
 
 print('done')
 

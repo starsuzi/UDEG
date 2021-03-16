@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-INPUT=data/json_format/pegasus_xsum_beam8_minlen5_3mc
-OUTPUT=data/indexes/lucene-index-pegasus_xsum_beam8_minlen5_3mc
+INPUT=data/json_format/pegasus_xsum_topk_4
+OUTPUT=data/indexes/lucene-index-pegasus_xsum_topk_4
 
 if [ ! -d "${OUTPUT}" ]
 then 
