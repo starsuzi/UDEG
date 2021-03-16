@@ -14,7 +14,7 @@ topk = [0.1474, 0.1523, 0.1509, 0.145]
 x = np.arange(len(labels))  # the label locations
 width = 0.25  # the width of the bars
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(7.2, 4.5))
 rects1 = ax.bar(
     x,
     base,
