@@ -19,7 +19,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 #np.random.seed(random_seed)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--batch_size', type=int, default=2, help='batch')
+parser.add_argument('--batch_size', type=int, default=4, help='batch')
 args = parser.parse_args()
 
 class AntiqueDataset(Dataset):
@@ -95,9 +95,10 @@ for batch in tqdm(eval_loader):
             )
         tgt_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
         #import pdb; pdb.set_trace()
-    
+    import pdb; pdb.set_trace()
     with open(filePath, 'a+') as lf:
         lf.write('\n'.join(tgt_text))
         lf.write(tgt_text)
         lf.write('\n')
+        
         
