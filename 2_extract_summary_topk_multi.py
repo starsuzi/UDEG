@@ -19,7 +19,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 #np.random.seed(random_seed)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--batch_size', type=int, default=23, help='batch')
+parser.add_argument('--batch_size', type=int, default=2, help='batch')
 args = parser.parse_args()
 
 class AntiqueDataset(Dataset):
@@ -37,13 +37,13 @@ class AntiqueDataset(Dataset):
 
 torch_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-model_name = 'google/pegasus-cnn_dailymail'
+model_name = 'google/pegasus-xsum'
 #model_name = 'facebook/bart-large-xsum'
 tokenizer = PegasusTokenizer.from_pretrained(model_name)
 #tokenizer = BartTokenizer.from_pretrained(model_name)
 
 #tokenized document path
-with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/pegasus_test_text_cnn_dailymail_tokenized0', 'rb') as file:
+with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/pegasus_test_text_tokenized0', 'rb') as file:
     test_encoding = pickle.load(file)
 #with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/bart_test_text_tokenized1', 'rb') as file:
 #    test_encoding = pickle.load(file)
@@ -62,12 +62,12 @@ model = Net()
 model = nn.DataParallel(model, device_ids=[0, 1])
 model = model.to(torch_device)
 
-if os.path.exists('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_cnn_dailymail_beam8_minlen5_0'):
-  os.remove('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_cnn_dailymail_beam8_minlen5_0')
+if os.path.exists('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_0'):
+  os.remove('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_0')
 else:
   print("The file does not exist")
 
-filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_cnn_dailymail_beam8_minlen5_0'
+filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_0'
 
 for batch in tqdm(eval_loader):
     model.eval()
@@ -94,7 +94,10 @@ for batch in tqdm(eval_loader):
                 mask=batch["attention_mask"],
             )
         tgt_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
-
+        #import pdb; pdb.set_trace()
+    
     with open(filePath, 'a+') as lf:
         lf.write('\n'.join(tgt_text))
+        lf.write(tgt_text)
         lf.write('\n')
+        

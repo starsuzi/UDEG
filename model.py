@@ -33,13 +33,14 @@ class Net(torch.nn.Module):
                 max_length=self.max_len,
                 do_sample=True,
                 top_k=100,
-                num_return_sequences=4)
+                num_return_sequences=5)
         
         batch_size, seq_length = outputs.shape        
-
+        temp=outputs
         outputs = torch.cat((
             outputs,
             torch.zeros(batch_size, self.max_len - seq_length, dtype=int).to(outputs.device)
         ), dim=1)
-
+        
+        import pdb; pdb.set_trace()
         return outputs
