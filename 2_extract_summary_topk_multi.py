@@ -43,7 +43,7 @@ tokenizer = PegasusTokenizer.from_pretrained(model_name)
 #tokenizer = BartTokenizer.from_pretrained(model_name)
 
 #tokenized document path
-with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/pegasus_test_text_tokenized0', 'rb') as file:
+with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/pegasus_test_text_tokenized1', 'rb') as file:
     test_encoding = pickle.load(file)
 #with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/bart_test_text_tokenized1', 'rb') as file:
 #    test_encoding = pickle.load(file)
@@ -62,12 +62,12 @@ model = Net()
 model = nn.DataParallel(model, device_ids=[0, 1])
 model = model.to(torch_device)
 
-if os.path.exists('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_0'):
-  os.remove('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_0')
+if os.path.exists('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_1'):
+  os.remove('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_1')
 else:
   print("The file does not exist")
 
-filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_0'
+filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_1'
 
 for batch in tqdm(eval_loader):
     model.eval()
@@ -93,12 +93,19 @@ for batch in tqdm(eval_loader):
                 ids=batch["input_ids"],
                 mask=batch["attention_mask"],
             )
-        tgt_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
         #import pdb; pdb.set_trace()
-    import pdb; pdb.set_trace()
-    with open(filePath, 'a+') as lf:
-        lf.write('\n'.join(tgt_text))
-        lf.write(tgt_text)
-        lf.write('\n')
+        for i in range(0,5):
+            tgt_text = tokenizer.batch_decode(translated[:,i,:], skip_special_tokens=True)
+            matrix_tgt_text.append(tgt_text)
+        #import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
+    arr_tgt_text = np.array(matrix_tgt_text)
+    #import pdb; pdb.set_trace()
+    for j in range(0,len(batch['input_ids'])):
+        concat_summary = '[*SEP*]'.join(arr_tgt_text[:, j])
+        #import pdb; pdb.set_trace()
+        with open(filePath, 'a+') as lf:
+            lf.write(concat_summary)
+            lf.write('\n')
         
         
