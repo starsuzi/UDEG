@@ -40,7 +40,7 @@ class Net(torch.nn.Module):
         batch_size = len(ids)
         outputs = outputs.view(batch_size, self.num_seq, -1)
         batch_size, num_sequence, seq_length = outputs.shape   #batch, num_seq, seq_length     
-        temp=outputs
+        #temp=outputs
         
         outputs = torch.cat((
             outputs,

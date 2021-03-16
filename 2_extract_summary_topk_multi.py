@@ -19,7 +19,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 #np.random.seed(random_seed)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--batch_size', type=int, default=4, help='batch')
+parser.add_argument('--batch_size', type=int, default=10, help='batch')
 args = parser.parse_args()
 
 class AntiqueDataset(Dataset):
@@ -103,9 +103,12 @@ for batch in tqdm(eval_loader):
     #import pdb; pdb.set_trace()
     for j in range(0,len(batch['input_ids'])):
         concat_summary = '[*SEP*]'.join(arr_tgt_text[:, j])
-        #import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace() #if newline 없을때까지 
         with open(filePath, 'a+') as lf:
+            while '\n' in concat_summary:
+                concat_summary = concat_summary.replace("\n", '')
             lf.write(concat_summary)
+            #import pdb; pdb.set_trace()
             lf.write('\n')
         
         
