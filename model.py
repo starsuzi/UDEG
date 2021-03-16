@@ -37,7 +37,8 @@ class Net(torch.nn.Module):
                 num_return_sequences=self.num_seq)
         
         #import pdb; pdb.set_trace()
-        outputs = outputs.view(ids.shape, self.num_seq, -1)
+        batch_size = len(ids)
+        outputs = outputs.view(batch_size, self.num_seq, -1)
         batch_size, num_sequence, seq_length = outputs.shape   #batch, num_seq, seq_length     
         temp=outputs
         
