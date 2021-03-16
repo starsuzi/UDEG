@@ -20,10 +20,10 @@ x1 = [0, 1, 2, 3, 4, 5]
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 
-plt.plot(x1, MAP_BM25_LINE, "b*-", label="BM25")
-plt.plot(x1, MAP_QL_LINE, "rs-", label="QL")
-plt.plot(x1, MAP_BM25_RM3_LINE, "g+-", label="BM25+RM3")
-plt.plot(x1, MAP_QL_RM3_LINE, "c^-", label="QL+RM3")
+plt.plot(x1, MAP_BM25_LINE, "b*--", label="BM25")
+plt.plot(x1, MAP_QL_LINE, "rs--", label="QL")
+# plt.plot(x1, MAP_BM25_RM3_LINE, "g+-", label="BM25+RM3")
+# plt.plot(x1, MAP_QL_RM3_LINE, "c^-", label="QL+RM3")
 
 
 # plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')    # 설명 참고
@@ -32,7 +32,7 @@ axes.set_ylim([0.14, 0.25])
 
 plt.xlabel("Number of generated sentences", fontsize=14)
 plt.ylabel("MAP", fontsize=14)
-plt.legend(loc=4)
+plt.legend(loc=4, fontsize=14)
 
 plt.xticks(x1)
 
