@@ -7,18 +7,20 @@ matplotlib.rcParams.update({'font.size': 14})
 labels = ['BM25', 'BM25+RM3', 'QL', 'QL+RM3']
 bart = [0.4528,0.4536, 0.4107,0.3513]
 pegasus = [0.4751, 0.4707, 0.418, 0.3302]
-
-
+baseline = [0.4372,	0.424,	0.3566,	0.277]
+patterns = ['\\',None,'//']
 
 x = np.arange(len(labels))  # the label locations
-width = 0.35  # the width of the bars
+width = 0.25  # the width of the bars
 
-fig, ax = plt.subplots()
-rects1 = ax.bar(x - width/2, bart, width, label='BART')
-rects2 = ax.bar(x + width/2, pegasus, width, label='PEGASUS')
+fig, ax = plt.subplots(figsize=(7.2,4.5))
+rects1 = ax.bar(x - width, bart, width, label='BART',hatch='\\',color='red',edgecolor='black')
+rects2 = ax.bar(x, pegasus, width, label='PEGASUS',hatch='//',color='blue',edgecolor='black')
+rects3 = ax.bar(x + width, baseline, width, label='baseline',color='green',edgecolor='black')
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('NDCG@3')
+ax.set_ylim([0.2,0.5])
 #ax.set_title('Scores by group and gender')
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
@@ -38,10 +40,11 @@ def autolabel(rects):
 
 #autolabel(rects1)
 #autolabel(rects2)
+#autolabel(rects3)
 
 fig.tight_layout()
 
-plt.show()
+#plt.show()
 
 plt.savefig('./output/fig2.pdf', bbox_inches='tight', pad_inches=0)
 plt.savefig('./output/fig2.png', bbox_inches='tight', pad_inches=0)
