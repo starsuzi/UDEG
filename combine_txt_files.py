@@ -1,7 +1,13 @@
 
 lst_files = [
-		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_4mc0',
-		'/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_4mc1'
+		'/home/syjeong/DocExpan/Antique-ir/UPSA/result/lexrank_para.txt',
+		'/home/syjeong/DocExpan/Antique-ir/UPSA/result/lexrank_para_rest0_0.txt',
+		'/home/syjeong/DocExpan/Antique-ir/UPSA/result/lexrank_para_rest000_00.txt',
+		'/home/syjeong/DocExpan/Antique-ir/UPSA/result/lexrank_para_rest000_01.txt',
+		'/home/syjeong/DocExpan/Antique-ir/UPSA/result/lexrank_para_rest1_0.txt',
+		'/home/syjeong/DocExpan/Antique-ir/UPSA/result/lexrank_para_rest001_00.txt',
+		'/home/syjeong/DocExpan/Antique-ir/UPSA/result/lexrank_para_rest001_01.txt',
+		'/home/syjeong/DocExpan/Antique-ir/UPSA/result/lexrank_para_rest001_02.txt'
 		]
 
 
@@ -21,7 +27,8 @@ try :
 except :
 	print('error')	
 	
-fr = open('//home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_4','w')
+fr = open('/home/syjeong/DocExpan/Antique-ir/UPSA/result/lexrank_para_total.txt','w')
+print(len(full_txt))
 fr.write(full_txt)
 fr.close()
 
