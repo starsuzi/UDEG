@@ -1,14 +1,16 @@
-input_file = open('./data/text_format/tokenized/temp.txt', 'r')
+from tqdm import tqdm
 
-output_file_1 = open('./data/text_format/tokenized/topk_splitted/temp1.txt', 'w')
-output_file_2 = open('./data/text_format/tokenized/topk_splitted/temp2.txt', 'w')
-output_file_3 = open('./data/text_format/tokenized/topk_splitted/temp3.txt', 'w')
-output_file_4 = open('./data/text_format/tokenized/topk_splitted/temp4.txt', 'w')
-output_file_5 = open('./data/text_format/tokenized/topk_splitted/temp5.txt', 'w')
+input_file = open('./data/text_format/tokenized/test_pegasus_xsum_topk_5_sep_0', 'r')
+
+output_file_1 = open('./data/text_format/tokenized/topk_splitted/test_pegasus_xsum_topk_1_0.txt', 'w')
+output_file_2 = open('./data/text_format/tokenized/topk_splitted/test_pegasus_xsum_topk_2_0.txt', 'w')
+output_file_3 = open('./data/text_format/tokenized/topk_splitted/test_pegasus_xsum_topk_3_0.txt', 'w')
+output_file_4 = open('./data/text_format/tokenized/topk_splitted/test_pegasus_xsum_topk_4_0.txt', 'w')
+output_file_5 = open('./data/text_format/tokenized/topk_splitted/test_pegasus_xsum_topk_5_0.txt', 'w')
 
 lst_document = input_file.readlines()
 
-for multi_sentence in lst_document:
+for multi_sentence in tqdm(lst_document):
     
     multi_sentences = multi_sentence.split('[*SEP*]')
     
