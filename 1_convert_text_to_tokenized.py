@@ -16,7 +16,8 @@ model_name = 'google/pegasus-xsum'
 tokenizer = PegasusTokenizer.from_pretrained(model_name)
 
 test_encoding = tokenizer(dataset_test, truncation=True, padding='longest', return_tensors="pt")
-with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_text_tokenized','wb') as file:
+os.makedirs('tokenized',exist_ok=True)
+with open('./tokenized/test_text_tokenized','wb') as file:
     pickle.dump(test_encoding, file)
 
 print(len(dataset_test))
