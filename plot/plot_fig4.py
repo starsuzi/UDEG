@@ -8,7 +8,7 @@ labels = ["BM25", "BM25+RM3", "QL", "QL+RM3"]
 
 base = [0.2118, 0.2121, 0.1728, 0.1504]
 mc = [0.2386, 0.2344, 0.2306, 0.2121]
-topk = [0.1474, 0.1523, 0.1509, 0.145]
+topk = [0.2189, 0.217, 0.2201, 0.1998]
 
 
 x = np.arange(len(labels))  # the label locations
@@ -36,7 +36,7 @@ rects3 = ax.bar(
     x + width * 2,
     topk,
     width,
-    label="TopK",
+    label="Top-K",
     color="blue",
     hatch="//",
     edgecolor="black",
@@ -45,10 +45,10 @@ rects3 = ax.bar(
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel("MAP")
 # ax.set_title('Scores by group and gender')
-ax.set_ylim([0.1, 0.3])
+ax.set_ylim([0.1, 0.26])
 ax.set_xticks(x + 0.25)
 ax.set_xticklabels(labels)
-ax.legend()
+ax.legend(fontsize=12)
 
 
 def autolabel(rects):

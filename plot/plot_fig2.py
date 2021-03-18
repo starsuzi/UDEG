@@ -37,7 +37,7 @@ rects3 = ax.bar(
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel("MAP")
-ax.set_ylim([0.2, 0.55])
+ax.set_ylim([0.14, 0.24])
 # ax.set_title('Scores by group and gender')
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
