@@ -5,9 +5,9 @@ import numpy as np
 matplotlib.rcParams.update({"font.size": 14})
 
 labels = ["BM25", "BM25+RM3", "QL", "QL+RM3"]
-baseline = [0.4372, 0.424, 0.3566, 0.277]
-bart = [0.4528, 0.4536, 0.4107, 0.3513]
-pegasus = [0.4751, 0.4707, 0.418, 0.3302]
+baseline = [0.2118, 0.2121, 0.1728, 0.1504]
+bart = [0.2315, 0.2348, 0.2073, 0.1884]
+pegasus = [0.2324, 0.2314, 0.2061, 0.1784]
 
 x = np.arange(len(labels))  # the label locations
 width = 0.25  # the width of the bars
