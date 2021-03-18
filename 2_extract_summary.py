@@ -1,17 +1,29 @@
 import torch
-from transformers import PegasusForConditionalGeneration, PegasusTokenizer
+from transformers import (
+    PegasusForConditionalGeneration,
+    PegasusTokenizer,
+    BartForConditionalGeneration,
+    BartTokenizer,
+)
 from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
 import pickle, json
 import os, gc
 import argparse
+import numpy as np
 
 print("GOGO")
 gc.collect()
 torch.cuda.empty_cache()
 
+# random_seed = 2021
+# torch.manual_seed(random_seed)
+# np.random.seed(random_seed)
+
 parser = argparse.ArgumentParser()
-parser.add_argument("--device", type=int, default=0, help="CUDA device")
+
+parser.add_argument("--device", type=int, default=1, help="CUDA device")
+parser.add_argument("--batch_size", type=int, default=20, help="batch")
 args = parser.parse_args()
 
 
@@ -32,59 +44,77 @@ class AntiqueDataset(Dataset):
         return text
 
 
-torch_device = torch.device("cuda:" + str(args.device))
+torch_device = torch.device(
+    "cuda:" + str(args.device) if torch.cuda.is_available() else "cpu"
+)
 
 model_name = "google/pegasus-xsum"
+# model_name = 'facebook/bart-large-xsum'
 tokenizer = PegasusTokenizer.from_pretrained(model_name)
+# tokenizer = BartTokenizer.from_pretrained(model_name)
 
 # tokenized document path
 with open(
-    "./tokenized/test_text_tokenized",
+    "/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/pegasus_test_text_tokenized1",
     "rb",
 ) as file:
     test_encoding = pickle.load(file)
+# with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/bart_test_text_tokenized1', 'rb') as file:
+#    test_encoding = pickle.load(file)
+# with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/temp', 'rb') as file:
+#    test_encoding = pickle.load(file)
 
 test_encoding = test_encoding.to(torch_device)
 # len is 403666
 print(len(test_encoding["input_ids"]))
 test_dataset = AntiqueDataset(test_encoding, len(test_encoding["input_ids"]))
-eval_loader = DataLoader(test_dataset, batch_size=20, shuffle=False)
+eval_loader = DataLoader(
+    test_dataset, batch_size=args.batch_size, shuffle=False
+)
 model = PegasusForConditionalGeneration.from_pretrained(model_name).to(
     torch_device
 )
+# model = BartForConditionalGeneration.from_pretrained(model_name).to(torch_device)
 
-os.makedirs("decoded", exist_ok=True)
-filePath = "decoded/test_pegasus_xsum_k100_minlen5"  # test_pegasus_xsum_beam8_minlen3"
+if os.path.exists(
+    "/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc_notemp_1"
+):
+    os.remove(
+        "/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc_notemp_1"
+    )
+else:
+    print("The file does not exist")
+
+filePath = "/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_beam8_minlen5_3mc_notemp_1"
 
 for batch in tqdm(eval_loader):
     model.eval()
+    matrix_tgt_text = []
     with torch.no_grad():
-        translated = model.generate(
-            input_ids=batch["input_ids"],
-            attention_mask=batch["attention_mask"],
-            # num_beams=8,
-            no_repeat_ngram_size=3,
-            min_length=7,
-            do_sample=True,
-            top_k=100,
-            # num_return_sequences=3,
-        )
-        tgt_text = tokenizer.batch_decode(
-            translated, skip_special_tokens=True
-        )
-        # assert len(tgt_text) == 18
-        # tmp_tgt_text = []
-        # for a in range(6):
-        #     b = "|||||".join(tgt_text[3 * a : 3 * (a + 1)])
-        #     tmp_tgt_text.append(b)
-        # tgt_text = tmp_tgt_text[:]
-        # assert len(tgt_text) == 6
-        with open(filePath, "a+") as lf:
-            lf.write("\n")
-            lf.write("\n".join(tgt_text))
+        for i in range(0, 3):
+            model.train()
+            # translated = model.generate(**batch)
+            translated = model.generate(
+                input_ids=batch["input_ids"],
+                attention_mask=batch["attention_mask"],
+                num_beams=8,
+                no_repeat_ngram_size=3,
+                min_length=7,
+                do_sample=False,
+                # top_k=100,
+                num_return_sequences=1  # ,
+                # temperature=0.5
+            )
+            tgt_text = tokenizer.batch_decode(
+                translated, skip_special_tokens=True
+            )
+            matrix_tgt_text.append(tgt_text)
 
+        arr_tgt_text = np.array(matrix_tgt_text)
 
-with open(filePath, "r") as fin:
-    data = fin.read().splitlines(True)
-with open(filePath, "w") as fout:
-    fout.writelines(data[1:])
+        for j in range(0, len(batch["input_ids"])):
+            concat_summary = " ".join(arr_tgt_text[:, j])
+            # import pdb; pdb.set_trace()
+            with open(filePath, "a+") as lf:
+                lf.write(concat_summary)
+                lf.write("\n")
