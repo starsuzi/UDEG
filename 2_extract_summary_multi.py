@@ -89,7 +89,7 @@ for batch in tqdm(eval_loader):
     model.eval()
     matrix_tgt_text = []
     with torch.no_grad():
-        for i in range(0,4):
+        for i in range(0,5):
             model.train()
 
             batch["input_ids"] = batch["input_ids"].to(torch_device)
@@ -117,9 +117,12 @@ for batch in tqdm(eval_loader):
         arr_tgt_text = np.array(matrix_tgt_text)
 
         for j in range(0,len(batch['input_ids'])):
-            concat_summary = ' '.join(arr_tgt_text[:, j])
+            #concat_summary = ' '.join(arr_tgt_text[:, j])
+            concat_summary = '[*SEP*]'.join(arr_tgt_text[:, j])
             #import pdb; pdb.set_trace()
             with open(filePath, 'a+') as lf:
+                while '\n' in concat_summary:
+                    concat_summary = concat_summary.replace("\n", '')
                 lf.write(concat_summary)
                 lf.write('\n')
             
