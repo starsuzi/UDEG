@@ -38,13 +38,13 @@ plt.plot(x1, topk_uniq_ratio, "b*--", label="Top-K")
 axes = plt.axes()
 # axes.set_ylim([0.16, 0.25])
 
-plt.xlabel("Number of generated sentences", fontsize=14)
-plt.ylabel("Lexical Diversity", fontsize=14)
-plt.legend(loc="best", fontsize=12)
+plt.xlabel("Number of generated sentences", fontsize=18)
+plt.ylabel("Lexical Diversity", fontsize=18)
+plt.legend(loc="best", fontsize=18)
 
 plt.xticks(x1)
 
-plt.show()
+#plt.show()
 
 
 plt.savefig("./output/fig5.pdf", bbox_inches="tight", pad_inches=0)
