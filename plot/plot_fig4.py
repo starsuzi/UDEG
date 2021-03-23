@@ -36,7 +36,7 @@ rects3 = ax.bar(
     x + width * 2,
     topk,
     width,
-    label="Top-K",
+    label="top-k",
     color="blue",
     hatch="//",
     edgecolor="black",

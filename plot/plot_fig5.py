@@ -31,7 +31,7 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 
 plt.plot(x1, mcdrop_uniq_ratio, "r^--", label="MCdrop")
-plt.plot(x1, topk_uniq_ratio, "b*--", label="Top-K")
+plt.plot(x1, topk_uniq_ratio, "b*--", label="top-k")
 
 
 # plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')    # 설명 참고

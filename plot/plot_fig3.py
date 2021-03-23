@@ -22,8 +22,8 @@ plt.yticks(fontsize=14)
 
 plt.plot(x1, MAP_BM25_LINE, "b*--", label="MCdrop(BM25)")
 plt.plot(x1, MAP_QL_LINE, "r^--", label="MCdrop(QL)")
-plt.plot(x1, MAP_BM25_TOPK_LINE, "go:", label="Top-K(BM25)")
-plt.plot(x1, MAP_QL_TOPK_LINE, "cs:", label="Top-K(QL)")
+plt.plot(x1, MAP_BM25_TOPK_LINE, "go:", label="top-k(BM25)")
+plt.plot(x1, MAP_QL_TOPK_LINE, "cs:", label="top-k(QL)")
 
 
 # plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')    # 설명 참고
