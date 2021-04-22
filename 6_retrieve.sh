@@ -3,13 +3,13 @@
 
 # for non-offensive folder
 #mkdir -p data/output/non_offensive/pegasus_xsum_beam8_minlen5_3mc
-mkdir -p data/output/total/pegasus_xsum_topk_4
+mkdir -p data/output/total/pegasus_xsum_topk_1
 
 
-EXP="pegasus_xsum_topk_4"
-INDEX="data/indexes/lucene-index-pegasus_xsum_topk_4"
+EXP="pegasus_xsum_topk_1"
+INDEX="data/indexes/lucene-index-pegasus_xsum_topk_1"
 
-OUTPUT_BASE_PATH="data/output/total/pegasus_xsum_topk_4"
+OUTPUT_BASE_PATH="data/output/total/pegasus_xsum_topk_1"
 TOPICS="data/text_format/queries_test_text.txt"
 
 #OUTPUT_BASE_PATH="data/output/non_offensive/pegasus_xsum_beam8_minlen5_3mc"

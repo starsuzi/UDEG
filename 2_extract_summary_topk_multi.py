@@ -19,7 +19,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 #np.random.seed(random_seed)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--batch_size', type=int, default=10, help='batch')
+parser.add_argument('--batch_size', type=int, default=6, help='batch')
 args = parser.parse_args()
 
 class AntiqueDataset(Dataset):
@@ -43,7 +43,7 @@ tokenizer = PegasusTokenizer.from_pretrained(model_name)
 #tokenizer = BartTokenizer.from_pretrained(model_name)
 
 #tokenized document path
-with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/pegasus_test_text_tokenized1', 'rb') as file:
+with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/pegasus_test_text_tokenized0', 'rb') as file:
     test_encoding = pickle.load(file)
 #with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/bart_test_text_tokenized1', 'rb') as file:
 #    test_encoding = pickle.load(file)
@@ -62,12 +62,12 @@ model = Net()
 model = nn.DataParallel(model, device_ids=[0, 1])
 model = model.to(torch_device)
 
-if os.path.exists('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_1'):
-  os.remove('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_1')
+if os.path.exists('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_0'):
+  os.remove('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_0')
 else:
   print("The file does not exist")
 
-filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_1'
+filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/test_pegasus_xsum_topk_5_0'
 
 for batch in tqdm(eval_loader):
     model.eval()
