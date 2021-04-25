@@ -1,4 +1,5 @@
 import torch
+from torch import nn
 from transformers import PegasusForConditionalGeneration, PegasusTokenizer, BartForConditionalGeneration, BartTokenizer
 from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
@@ -34,21 +35,22 @@ class AntiqueDataset(Dataset):
 class CustomPEGASUSModel(torch.nn.Module):
     def __init__(self):
           super(CustomPEGASUSModel, self).__init__()
-          self.pegasus = PegasusTokenizer.from_pretrained('google/pegasus-xsum')
+          self.tok = PegasusTokenizer.from_pretrained('google/pegasus-xsum')
+          self.pegasus = PegasusForConditionalGeneration.from_pretrained('google/pegasus-xsum')
           ### New layers:
           self.linear1 = nn.Linear(768, 256)
           self.linear2 = nn.Linear(256, 3) ## 3 is the number of classes in this example
 
     def forward(self, ids, mask):
-          sequence_output, pooled_output = self.pegasus(
-               ids, 
-               attention_mask=mask)
+          #print(self.pegasus)
+          
+          sequence_output = self.pegasus(ids, attention_mask=mask)
 
           # sequence_output has the following shape: (batch_size, sequence_length, 768)
-          linear1_output = self.linear1(sequence_output[:,0,:].view(-1,768)) ## extract the 1st token's embeddings
-          linear2_output = self.linear2(linear2_output)
+          # linear1_output = self.linear1(sequence_output[:,0,:].view(-1,768)) ## extract the 1st token's embeddings
+          # linear2_output = self.linear2(linear2_output)
 
-          return linear2_output
+          return sequence_output
 
 
 torch_device = torch.device("cuda:"+str(args.device) if torch.cuda.is_available() else 'cpu')
@@ -62,7 +64,7 @@ with open('/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/temp', '
 test_encoding = test_encoding.to(torch_device)
 print(len(test_encoding['input_ids']))
 test_dataset = AntiqueDataset(test_encoding,len(test_encoding['input_ids']))
-eval_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False)
+train_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False)
 
 model = CustomPEGASUSModel().to(torch_device)
 
@@ -73,10 +75,29 @@ else:
 
 filePath = '/home/syjeong/DocExpan/Antique-ir/data/text_format/tokenized/theme_temp'
 
-for batch in tqdm(train_loader):
+#print(model)
     
-
+for batch in tqdm(train_loader):
+    #print(batch)
+    matrix_tgt_text = []
+    model.train()
+    #print(model(batch["input_ids"], batch["attention_mask"]))
+    #print(batch["input_ids"])
+    a = model(batch["input_ids"], batch["attention_mask"])
+    '''
+    translated = model.generate(
+        input_ids=batch["input_ids"],
+        attention_mask=batch["attention_mask"],
+        num_beams=8,
+        no_repeat_ngram_size=3,
+        min_length=7,
+        do_sample=False,
+        #top_k=100,
+        num_return_sequences=1        
+    )
+    '''
 '''
+for batch in tqdm(train_loader):
 for batch in tqdm(eval_loader):
     model.eval()
     matrix_tgt_text = []
