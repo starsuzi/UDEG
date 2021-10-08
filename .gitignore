@@ -1,11 +1,5 @@
-/data
+data/
 anserini/
 temp.py
 temp.txt
-TGLS/
-UPSA/
-TED.zip
-TED/
 __pycache__/
-env/
-.vscode/

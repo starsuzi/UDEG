@@ -3,8 +3,6 @@ import json
 import os
 import argparse
 
-#flags.DEFINE_string('collection_path', None, 'MS MARCO .tsv collection file.')
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--input_folder',
