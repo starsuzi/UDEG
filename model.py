@@ -8,7 +8,6 @@ class Net(torch.nn.Module):
     def __init__(self):
         super(Net, self).__init__()
         self.model = PegasusForConditionalGeneration.from_pretrained('google/pegasus-xsum')
-        #self.model = PegasusForConditionalGeneration.from_pretrained('google/pegasus-cnn_dailymail')
         self.max_len = 80
         self.num_seq = 1
 

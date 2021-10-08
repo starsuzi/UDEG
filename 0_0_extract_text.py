@@ -9,22 +9,22 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--output_doc_text_only",
                     help="output document directory in text format.",
                     type=str,
-                    default = './data/text_format/test_text.txt')
+                    default = './data/antique/test_text.txt')
 
 parser.add_argument("--output_doc",
                     help="output document directory in text format.",
                     type=str,
-                    default = './data/text_format/docs_test_text.txt')
+                    default = './data/antique/docs_test_text.txt')
 
 parser.add_argument("--output_quer",
                     help="output queries directory in text format.",
                     type=str,
-                    default = './data/text_format/queries_test_non-offensive_text.txt')
+                    default = './data/antique/queries_test_text.txt')
 
 parser.add_argument("--output_qrel",
                     help="output qrels directory in text format.",
                     type=str,
-                    default = './data/text_format/qrels_test_non-offensive_text.txt')
+                    default = './data/antique/qrels_test_text.txt')
 
 args = parser.parse_args()
 
@@ -58,7 +58,7 @@ if os.path.isfile(args.output_qrel):
     sys.exit(0)
 
 # load dataset
-dataset = ir_datasets.load('antique/test/non-offensive')
+dataset = ir_datasets.load('antique/test')
 
 # document text only extraction
 with open(args.output_doc_text_only, mode="w") as outfile: 
