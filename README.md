@@ -46,6 +46,7 @@ python 1_convert_text_to_tokenized.py
 ```bash
 python 2_abstract_summary_multi.py
 ```
+We provide the abstractly & stochastically generated output file in this repository (test_pegasus_xsum_4mc.tar.gz).
 
 ### 5. Convert to json format
 We refer to the repository of https://github.com/nyu-dl/dl4ir-doc2query.
