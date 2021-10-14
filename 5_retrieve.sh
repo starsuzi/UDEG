@@ -1,10 +1,10 @@
-mkdir -p data/output/total/pegasus_xsum_topk_1
+mkdir -p data/antique/output/pegasus_xsum_beam8_minlen7_4mc
 
-EXP="pegasus_xsum_topk_1"
-INDEX="data/indexes/lucene-index-pegasus_xsum_topk_1"
+EXP="pegasus_xsum_beam8_minlen7_4mc"
+INDEX="data/antique/indexes/lucene-index-pegasus_xsum_beam8_minlen7_4mc"
 
-OUTPUT_BASE_PATH="data/output/total/pegasus_xsum_topk_1"
-TOPICS="data/text_format/queries_test_text.txt"
+OUTPUT_BASE_PATH="data/antique/output/pegasus_xsum_beam8_minlen7_4mc"
+TOPICS="data/antique/queries_test_text.txt"
 
 for MODEL in "bm25" "qld"
 do

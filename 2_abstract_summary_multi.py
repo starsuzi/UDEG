@@ -52,6 +52,9 @@ model = Net()
 model = nn.DataParallel(model, device_ids=[0, 1])
 model = model.to(torch_device)
 
+path = './data/antique/abs_summary'
+os.makedirs(path, exist_ok=True)
+
 if os.path.exists('./data/antique/abs_summary/test_pegasus_xsum_4mc'):
   os.remove('./data/antique/abs_summary/test_pegasus_xsum_4mc')
 else:

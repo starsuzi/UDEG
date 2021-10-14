@@ -26,8 +26,11 @@ test_encoding = tokenizer(
     dataset_test, truncation=True, padding="longest", return_tensors="pt"
 )
 
+path = './data/antique/tokenized'
+os.makedirs(path, exist_ok=True)
+
 with open(
-    "/home/syjeong/UDEG/data/antique/tokenized/pegasus_test_text_tokenized",
+    "./data/antique/tokenized/pegasus_test_text_tokenized",
     "wb",
 ) as file:
     pickle.dump(test_encoding, file)

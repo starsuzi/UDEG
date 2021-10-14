@@ -7,12 +7,12 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--input_folder',
                     help='json collection file',
-                    default = './data/text_format/docs_test_text.txt')
+                    default = './data/antique/docs_test_text.txt')
     
 parser.add_argument("--output_folder",
                     help="output directory.",
                     type=str,
-                    default = './data/json_format/pegasus_xsum_topk_1')
+                    default = './data/antique/json_format/pegasus_xsum_beam8_minlen7_4mc')
 
 parser.add_argument('--max_docs_per_file', 
                     default=1000000, 
@@ -20,7 +20,7 @@ parser.add_argument('--max_docs_per_file',
 
 parser.add_argument('--predictions',  
                     help='File containing predicted summary.',
-                    default = './data/text_format/tokenized/topk_splitted/test_pegasus_xsum_topk_1.txt')                 
+                    default = './data/antique/abs_summary/test_pegasus_xsum_beam8_minlen7_4mc')                 
 
 args = parser.parse_args()
 

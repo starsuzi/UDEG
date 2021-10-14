@@ -3,6 +3,9 @@ import os
 import sys
 import argparse
 
+path = './data/antique'
+os.makedirs(path, exist_ok=True)
+
 # get the command line arguments
 parser = argparse.ArgumentParser()
 

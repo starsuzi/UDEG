@@ -1,8 +1,19 @@
-## 1. Installing anserini
+# Unsupervised Document Expansion for Information Retrieval with Stochastic Text Generation
 
-Here, we use the open-source information retrieval toolkit [anserini](http://anserini.io/) which is built on [Lucene](https://lucene.apache.org/).
-Below are the installation steps for a mac computer (tested on OSX 10.14) based on their [colab demo](https://colab.research.google.com/drive/1s44ylhEkXDzqNgkJSyXDYetGIxO9TWZn).
+Official Code Repository for the paper "Unsupervised Document Expansion for Information Retrieval with Stochastic Text Generation" (SDP@NAACL 2021): https://aclanthology.org/2021.sdp-1.2/
 
+## Abstract
+One of the challenges in information retrieval (IR) is the vocabulary mismatch problem, which happens when the terms between queries and documents are lexically different but semantically similar. While recent work has proposed to expand the queries or documents by enriching their representations with additional relevant terms to address this challenge, they usually require a large volume of query-document pairs to train an expansion model. In this paper, we propose an Unsupervised Document Expansion with Generation (UDEG) framework with a pre-trained language model, which generates diverse supplementary sentences for the original document without using labels on query-document pairs for training. For generating sentences, we further stochastically perturb their embeddings to generate more diverse sentences for document expansion. We validate our framework on two standard IR benchmark datasets. The results show that our framework significantly outperforms relevant expansion baselines for IR.
+
+## Dependencies
+* Python 3.7.9
+* Pytorch 1.7.0
+* Transformers 4.3
+
+## Run
+### 1. Installing anserini
+
+We use the open-source information retrieval toolkit [anserini](http://anserini.io/).
 
 ```bash
 # install maven
@@ -19,84 +30,51 @@ cd tools/eval && tar xvfz trec_eval.9.0.4.tar.gz && cd trec_eval.9.0.4 && make &
 cd tools/eval/ndeval && make && cd ../../..
 ```
 
-[`anserini/`](./anserini/): source folder for [anserini](https://github.com/castorini/anserini), indexes for the information corpuses, and [trec_eval](https://github.com/usnistgov/trec_eval).
-
-```
-+---anserini 
-|   +---eval
-|   |   \---trec_eval.9.0.4
-|   \---target
-|       +---appassembler
-|       |   +---bin
+### 2. Data Preprocessing
+```bash
+python 0_0_extract_text.py
+python 0_1_convert_qrels_to_binary.py
+python 0_2_convert_qrels_to_ndcg_scale.py
 ```
 
-
-## 2. 파일 순서대로 실행
-* input, output를 잘 설정하기!
-* 2_extract_summary가 pegasus 코드이고, 모델 바꿀때마다 input, output 잘 설정하기.
-
-data folder은 다음과 같음.
+### 3. Data Tokenization
+```bash
+python 1_convert_text_to_tokenized.py
 ```
-+---data 
-|   +---indexes
-|   |   +---lucene-index-baseline
-|   |   |       
-|   |   +---lucene-index-pegasus_xsum 
-|   +---json_format
-|   |   +---baseline
-|   |   |     docs00.json
-|   |   +---pegasus_xsum
-|   |   |   docs00.json
-|   +---output
-|   |   +---non_offensive
-|   |   |   +---baseline
-|   |   |   |   run.baseline.bm25.results
-|   |   |   |   run.baseline.bm25.txt
-|   |   |   |   run.baseline.bm25+rm3.results
-|   |   |   |   run.baseline.bm25+rm3.txt
-|   |   |   |   run.baseline.qld.results
-|   |   |   |   run.baseline.qld.txt
-|   |   |   |   run.baseline.qld+rm3.results
-|   |   |   |   run.baseline.qld+rm3.txt
-|   |   |   +---pegasus_xsum
-|   |   |   |   run.pegasus_xsum.bm25.results
-|   |   |   |   run.pegasus_xsum.bm25.txt
-|   |   |   |   run.pegasus_xsum.bm25+rm3.results
-|   |   |   |   run.pegasus_xsum.bm25+rm3.txt
-|   |   |   |   run.pegasus_xsum.qld.results
-|   |   |   |   run.pegasus_xsum.qld.txt
-|   |   |   |   run.pegasus_xsum.qld+rm3.results
-|   |   |   |   run.pegasus_xsum.qld+rm3.txt
-|   |   +---total
-|   |   |   +---baseline
-|   |   |   |   run.baseline.bm25.results
-|   |   |   |   run.baseline.bm25.txt
-|   |   |   |   run.baseline.bm25+rm3.results
-|   |   |   |   run.baseline.bm25+rm3.txt
-|   |   |   |   run.baseline.qld.results
-|   |   |   |   run.baseline.qld.txt
-|   |   |   |   run.baseline.qld+rm3.results
-|   |   |   |   run.baseline.qld+rm3.txt
-|   |   |   +---pegasus_xsum
-|   |   |   |   run.pegasus_xsum.bm25.results
-|   |   |   |   run.pegasus_xsum.bm25.txt
-|   |   |   |   run.pegasus_xsum.bm25+rm3.results
-|   |   |   |   run.pegasus_xsum.bm25+rm3.txt
-|   |   |   |   run.pegasus_xsum.qld.results
-|   |   |   |   run.pegasus_xsum.qld.txt
-|   |   |   |   run.pegasus_xsum.qld+rm3.results
-|   |   |   |   run.pegasus_xsum.qld+rm3.txt
-|   +---text_format
-|   |   +---tokenized
-|   |   |   test_pegasus_reddit
-|   |   |   test_pegasus_xsum
-|   |   |   test_text_tokenized
-|   |   docs_test_text.txt
-|   |   qrels_test_non-offensive_text_binary.txt
-|   |   qrels_test_non-offensive_text.txt
-|   |   qrels_test_text_binary.txt
-|   |   qrels_test_text.txt
-|   |   queries_test_non-offensive_text.txt
-|   |   queries_test_text.txt
-|   |   test_text.txt
+
+### 4. Abstractive Generation with Stochastic Text Generation
+```bash
+python 2_abstract_summary_multi.py
+```
+
+### 5. Convert to json format
+We refer to the repository of https://github.com/nyu-dl/dl4ir-doc2query.
+```bash
+python 3_concat_collection_summary_to_json.py
+```
+### 6. Indexing, Retrieval, Evaluation
+We refer to the repository of https://github.com/boudinfl/ir-using-kg#data.
+```bash
+sh 4_create_indexes.sh
+sh 5_retrieve.sh
+sh 6_evaluate.sh
+```
+
+## Cite
+```BibTex
+@inproceedings{jeong-etal-2021-unsupervised,
+    title = "Unsupervised Document Expansion for Information Retrieval with Stochastic Text Generation",
+    author = "Jeong, Soyeong  and
+      Baek, Jinheon  and
+      Park, ChaeHun  and
+      Park, Jong",
+    booktitle = "Proceedings of the Second Workshop on Scholarly Document Processing",
+    month = jun,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.sdp-1.2",
+    doi = "10.18653/v1/2021.sdp-1.2",
+    pages = "7--17"
+}
 ```
