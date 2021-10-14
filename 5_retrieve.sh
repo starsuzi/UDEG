@@ -1,9 +1,9 @@
-mkdir -p data/antique/output/pegasus_xsum_beam8_minlen7_4mc
+mkdir -p data/antique/output/pegasus_xsum_4mc
 
-EXP="pegasus_xsum_beam8_minlen7_4mc"
-INDEX="data/antique/indexes/lucene-index-pegasus_xsum_beam8_minlen7_4mc"
+EXP="pegasus_xsum_4mc"
+INDEX="data/antique/indexes/lucene-index-pegasus_xsum_4mc"
 
-OUTPUT_BASE_PATH="data/antique/output/pegasus_xsum_beam8_minlen7_4mc"
+OUTPUT_BASE_PATH="data/antique/output/pegasus_xsum_4mc"
 TOPICS="data/antique/queries_test_text.txt"
 
 for MODEL in "bm25" "qld"

@@ -1,5 +1,5 @@
-INPUT=data/antique/json_format/pegasus_xsum_beam8_minlen7_4mc
-OUTPUT=data/antique/indexes/lucene-index-pegasus_xsum_beam8_minlen7_4mc
+INPUT=data/antique/json_format/pegasus_xsum_4mc
+OUTPUT=data/antique/indexes/lucene-index-pegasus_xsum_4mc
 
 if [ ! -d "${OUTPUT}" ]
 then 

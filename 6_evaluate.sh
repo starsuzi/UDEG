@@ -1,4 +1,4 @@
-INPUT_BASE_PATH="data/antique/output/pegasus_xsum_beam8_minlen7_4mc/"
+INPUT_BASE_PATH="data/antique/output/pegasus_xsum_4mc/"
 
 #for P, R, map, recip_rank
 QREL_PATH="data/antique/qrels_test_text_binary.txt"
